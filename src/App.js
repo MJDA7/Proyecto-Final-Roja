@@ -6,7 +6,7 @@ const axios = require ("axios");
 
 function App() {
   return ( <>
-    const axios = require ("axios");
+    
      
   </>
     
