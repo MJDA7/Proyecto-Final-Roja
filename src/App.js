@@ -1,49 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import InfoGlobal from "./Componentes/InfoGlobal"
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 
-class App extends Component {
 
-state = {
-  data: [],
-};
+import Home from './Views/Home/Home';
+import MundialView from './Views/MundialView/MundialView';
+import View404 from './Views/View404/View404'
 
-stateData = (dataApi) => {
-  this.setState({ data: dataApi });
-  };
-
-  getData = async () => {
-    let response = await fetch("https://api.covid19api.com/summary");
-    let data = await response.json();
-    this.stateData(data);
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
-render () {
-    return ( <>
-      <header className= "header"> 
-          <h1>COVID-19</h1>
-      </header>
-      
-      <div direction= "row" justify= "center" alignItems= "center">
-        <InfoGlobal
-          data= {data.Date}
-          NewConfirmed={data.Global && data.Global.NewConfirmed}
-          TotalConfirmed={data.Global && data.Global.TotalConfirmed}
-          TotalDeaths={data.Global && data.Global.TotalDeaths}
-          NewDeaths={data.Global && data.Global.NewDeaths}
-          NewRecovered={data.Global && data.Global.NewRecovered}
-          TotalRecovered={data.Global && data.Global.TotalRecovered}
-        />
-      </div> 
-    </>
-      
-    );  
-  }
+function App() {
+  return (
+    <Router>
+      <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route path="/create">
+            <MundialView/>
+          </Route>
+          <Route path="*">
+            <View404 />
+          </Route>
+      </Switch>
+  </Router>
+  );
 }
-
 
 export default App;
